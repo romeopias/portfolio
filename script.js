@@ -18,4 +18,41 @@
         function toggleEffect() { const btn = document.querySelector(&#39;.effect-btn&#39;); isMulticolor = !isMulticolor; if (isMulticolor) { btn.innerHTML = &#39;&lt;i class=&#34;fas fa-magic&#34;&gt;&lt;/i&gt; MAGIC ON&#39;; btn.style.background = &#34;#ff00de&#34;; btn.style.color = &#34;#fff&#34;; btn.style.borderColor = &#34;#ff00de&#34;; } else { btn.innerHTML = &#39;&lt;i class=&#34;fas fa-magic&#34;&gt;&lt;/i&gt; MAGIC OFF&#39;; btn.style.background = &#34;rgba(255, 255, 255, 0.1)&#34;; btn.style.color = &#34;#0ff&#34;; btn.style.borderColor = &#34;#0ff&#34;; } }
         const canvas = document.getElementById(&#34;particles&#34;); const ctx = canvas.getContext(&#34;2d&#34;); canvas.width = window.innerWidth; canvas.height = window.innerHeight; let particlesArray; let mouse = { x: null, y: null, radius: (canvas.height/80) * (canvas.width/80) }
         window.addEventListener(&#39;mousemove&#39;, (event) =&gt; { mouse.x = event.x; mouse.y = event.y; }); class Particle { constructor(x, y, directionX, directionY, size, color) { this.x = x; this.y = y; this.directionX = directionX; this.directionY = directionY; this.size = size; this.randomColor = &#39;hsl(&#39; + Math.random() * 360 + &#39;, 100%, 50%)&#39;; } draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false); if(isMulticolor) { ctx.fillStyle = this.randomColor; } else { ctx.fillStyle = &#39;#00ffff&#39;; } ctx.fill(); } update() { if (this.x &gt; canvas.width || this.x &lt; 0) { this.directionX = -this.directionX; } if (this.y &gt; canvas.height || this.y &lt; 0) { this.directionY = -this.directionY; } let dx = mouse.x - this.x; let dy = mouse.y - this.y; let distance = Math.sqrt(dx*dx + dy*dy); if (distance &lt; mouse.radius + this.size){ if (mouse.x &lt; this.x &amp;&amp; this.x &lt; canvas.width - this.size * 10) { this.x += 3; } if (mouse.x &gt; this.x &amp;&amp; this.x &gt; this.size * 10) { this.x -= 3; } if (mouse.y &lt; this.y &amp;&amp; this.y &lt; canvas.height - this.size * 10) { this.y += 3; } if (mouse.y &gt; this.y &amp;&amp; this.y &gt; this.size * 10) { this.y -= 3; } } this.x += this.directionX; this.y += this.directionY; this.draw(); } } function init() { particlesArray = []; let numberOfParticles = (canvas.height * canvas.width) / 9000; for (let i = 0; i &lt; numberOfParticles; i++) { let size = (Math.random() * 2) + 1; let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2); let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2); let directionX = (Math.random() * 2) - 1; let directionY = (Math.random() * 2) - 1; let color = &#39;#00ffff&#39;; particlesArray.push(new Particle(x, y, directionX, directionY, size, color)); } } function connect() { let opacityValue = 1; for (let a = 0; a &lt; particlesArray.length; a++) { for (let b = a; b &lt; particlesArray.length; b++) { let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y)); if (distance &lt; (canvas.width/7) * (canvas.height/7)) { opacityValue = 1 - (distance/20000); if(isMulticolor) { ctx.strokeStyle = &#39;rgba(&#39; + Math.random()*255 + &#39;,&#39; + Math.random()*255 + &#39;,&#39; + Math.random()*255 + &#39;,&#39; + opacityValue + &#39;)&#39;; } else { ctx.strokeStyle = &#39;rgba(0, 255, 255,&#39; + opacityValue + &#39;)&#39;; } ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(particlesArray[a].x, particlesArray[a].y); ctx.lineTo(particlesArray[b].x, particlesArray[b].y); ctx.stroke(); } } } } function animate() { requestAnimationFrame(animate); ctx.clearRect(0, 0, innerWidth, innerHeight); for (let i = 0; i &lt; particlesArray.length; i++) { particlesArray[i].update(); } connect(); } window.addEventListener(&#39;resize&#39;, function(){ canvas.width = innerWidth; canvas.height = innerHeight; mouse.radius = ((canvas.height/80) * (canvas.height/80)); init(); }); init(); animate();
+wave.js
+const canvas = document.getElementById("wave-canvas");
+const ctx = canvas.getContext("2d");
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resize);
+resize();
+
+let t = 0;
+
+function drawWave() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.beginPath();
+  ctx.moveTo(0, canvas.height / 2);
+
+  for (let x = 0; x < canvas.width; x++) {
+    const y =
+      canvas.height / 2 +
+      Math.sin(x * 0.01 + t) * 40 +
+      Math.sin(x * 0.02 + t * 1.5) * 20;
+
+    ctx.lineTo(x, y);
+  }
+
+  ctx.strokeStyle = "rgba(0, 150, 255, 0.7)";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  t += 0.02;
+  requestAnimationFrame(drawWave);
+}
+
+drawWave();
 
