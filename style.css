@@ -1,6 +1,6 @@
 
     /* --- বেসিক সেটআপ --- */
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: &#39;Rajdhani&#39;, sans-serif; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Rajdhani', sans-serif; }
 
  body { 
             background-color: #000; color: white; height: 100vh; overflow: hidden; 
