@@ -56,3 +56,34 @@ function drawWave() {
 
 drawWave();
 
+
+const profileImg = document.getElementById("profileImg");
+const popup = document.getElementById("secretPopup");
+const closePopup = document.getElementById("closePopup");
+
+let holdTimer;
+
+// Start holding
+profileImg.addEventListener("mousedown", startHold);
+profileImg.addEventListener("touchstart", startHold);
+
+// Stop holding
+profileImg.addEventListener("mouseup", cancelHold);
+profileImg.addEventListener("mouseleave", cancelHold);
+profileImg.addEventListener("touchend", cancelHold);
+
+function startHold() {
+  holdTimer = setTimeout(() => {
+    popup.style.display = "block";
+  }, 3000); // 3 seconds
+}
+
+function cancelHold() {
+  clearTimeout(holdTimer);
+}
+
+// Close popup
+closePopup.addEventListener("click", () => {
+  popup.style.display = "none";
+});
+
