@@ -87,3 +87,49 @@ closePopup.addEventListener("click", () => {
   popup.style.display = "none";
 });
 
+
+const orb = document.querySelector(".cyber-orb");
+const wave = document.querySelector(".click-wave");
+
+let mouseX = window.innerWidth / 2;
+let mouseY = window.innerHeight / 2;
+let orbX = mouseX;
+let orbY = mouseY;
+
+// Track mouse
+document.addEventListener("mousemove", (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+// Smooth orb follow
+function animateOrb() {
+  orbX += (mouseX - orbX) * 0.07;
+  orbY += (mouseY - orbY) * 0.07;
+
+  orb.style.left = orbX + "px";
+  orb.style.top = orbY + "px";
+
+  requestAnimationFrame(animateOrb);
+}
+animateOrb();
+
+// Click reaction
+document.addEventListener("click", (e) => {
+  wave.style.left = e.clientX - 10 + "px";
+  wave.style.top = e.clientY - 10 + "px";
+  wave.style.width = "20px";
+  wave.style.height = "20px";
+  wave.style.opacity = "1";
+  wave.style.transition = "none";
+
+  setTimeout(() => {
+    wave.style.transition = "all 0.6s ease-out";
+    wave.style.width = "300px";
+    wave.style.height = "300px";
+    wave.style.left = e.clientX - 150 + "px";
+    wave.style.top = e.clientY - 150 + "px";
+    wave.style.opacity = "0";
+  }, 10);
+});
+
