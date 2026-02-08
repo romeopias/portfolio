@@ -20,18 +20,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">   
   </head>
   <body oncontextmenu="return false;">
+    <!-- ADD THIS: Background animation canvas -->
+    <canvas class="wave-canvas" id="wave-canvas"></canvas>
+
     <button class="effect-btn" onclick="toggleEffect()">
       <i class="fas fa-magic"></i>
       MAGIC OFF
     </button>
-<div class="cyber-orb"></div>
-<div class="click-wave"></div>
+
+    <!-- Cyber orb and wave effects -->
+    <div class="cyber-orb"></div>
+    <div class="click-wave"></div>
+
     <div class="card-container" id="mainCard">
       <div class="card">
         <div class="content">
           <div class="img-wrapper" id="scanTrigger">
-            <div class="scan-ring">
-            </div>
+            <div class="scan-ring"></div>
             <img src="profile.jpg" alt="Profile" class="profile-img" />
           </div>
           <p class="clue-text">
@@ -50,14 +55,26 @@
             <a href="https://github.com/romeopias" target="_blank" class="btn">GitHub Profile</a>
           </div>
           <div class="socials">
-<a href="https://www.facebook.com/rpias4" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-<a href="https://www.instagram.com/si__pias" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-<a href="https://github.com/romeopias" target="_blank"> <i class="fa-brands fa-github"></i></a>
+            <a href="https://www.facebook.com/rpias4" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://www.instagram.com/si__pias" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://github.com/romeopias" target="_blank"> <i class="fa-brands fa-github"></i></a>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Secret modal (for hold unlock feature) -->
+    <div class="secretModal" id="secretModal">
+      <img src="profile.jpg" alt="Love" class="love-img" />
+      <h2 class="love-title">Welcome!</h2>
+      <p class="love-msg">Thanks for exploring my portfolio!</p>
+      <button class="back-btn" onclick="closeSecret()">Back</button>
+    </div>
+
     <a href="https://wa.me/+8801850602619" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script src="wave.js"></script>
   </body>
 </html>
-
