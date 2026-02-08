@@ -117,5 +117,42 @@
   }
 }
 
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #05080f;
+  overflow: hidden;
+  color: #fff;
+}
+
+/* Main cyber orb */
+.cyber-orb {
+  position: fixed;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(0, 255, 255, 0.35),
+    rgba(0, 255, 255, 0.15),
+    transparent 60%
+  );
+  filter: blur(25px);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+/* Click pulse wave */
+.click-wave {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(0, 255, 255, 0.8);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  z-index: -1;
+}
 
    
